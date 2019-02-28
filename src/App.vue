@@ -1,11 +1,15 @@
 <template>
   <div id="app">
-    <Clock :size="400" :subdivisions="[x, y]" />
+    <Clock :size="400" :subdivisions="[x, y]" :active="[ax, ay]" />
     
     <div>
       <input type="number" min="1" max="16" v-model="x" />
       :
       <input type="number" min="1" max="16" v-model="y" />
+    </div>
+    <div>
+      <input type="range" min="0" :max="x - 1" v-model="ax" />
+      <input type="range" min="0" :max="y - 1" v-model="ay" />
     </div>
   </div>
 </template>
@@ -19,7 +23,7 @@ export default {
     Clock
   },
   data: function() {
-    return { x: 2, y: 3 };
+    return { x: 2, y: 3, ax: 0, ay: 0 };
   }
 }
 </script>

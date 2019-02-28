@@ -2,9 +2,9 @@
   <svg :width="size" :height="size">
     <circle class="face" :cx="radius" :cy="radius" :r="radius" />
 
-    <g v-for="circle in circles">
+    <g v-for="(circle, i) in circles">
       <circle class="circle" :cx="radius" :cy="radius" :r="circle.radius" />
-      <circle v-for="dot in circle.dots" class="dot" :cx="dot.x" :cy="dot.y" r="10" />
+      <circle v-for="(dot, j) in circle.dots" :class="{ dot: true, active: active[i] == j }" :cx="dot.x" :cy="dot.y" r="10" />
     </g>
   </svg>
 </template>
@@ -25,7 +25,8 @@ export default {
   name: 'clock',
   props: {
     size: Number,
-    subdivisions: Array
+    subdivisions: Array,
+    active: Array
   },
   computed: {
     radius: function() {
@@ -54,5 +55,9 @@ export default {
 
 .dot {
   fill: #ddd;
+}
+
+.active {
+  fill: #0fafff;
 }
 </style>
