@@ -57,7 +57,12 @@ export default {
   fill: #ddd;
 }
 
+@keyframes flash {
+  0% { fill: #0fafff; }
+  100% { fill: #ddd; }
+}
+
 .active {
-  fill: #0fafff;
+  animation: flash 0.5s;
 }
 </style>
