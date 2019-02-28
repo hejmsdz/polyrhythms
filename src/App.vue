@@ -9,7 +9,12 @@
     </div>
     <div>
       <input type="range" min="0" :max="x - 1" v-model="ax" />
+      <br />
       <input type="range" min="0" :max="y - 1" v-model="ay" />
+    </div>
+    <div>
+      <button @click="start" v-if="!active">Start</button>
+      <button @click="stop" v-if="active">Stop</button>
     </div>
   </div>
 </template>
@@ -23,7 +28,28 @@ export default {
     Clock
   },
   data: function() {
-    return { x: 2, y: 3, ax: 0, ay: 0 };
+    return { x: 2, y: 3, ax: 0, ay: 0, active: false, xIntvl: null, yIntvl: null };
+  },
+  methods: {
+    start: function() {
+      const measure = 2000;
+      this.xIntvl = setInterval(() => {
+        this.ax++;
+        this.ax %= this.x;
+      }, measure / this.x);
+
+      this.yIntvl = setInterval(() => {
+        this.ay++;
+        this.ay %= this.y;
+      }, measure / this.y);
+
+      this.active = true;
+    },
+    stop: function() {
+      clearInterval(this.xIntvl);
+      clearInterval(this.yIntvl);
+      this.active = false;
+    }
   }
 }
 </script>
