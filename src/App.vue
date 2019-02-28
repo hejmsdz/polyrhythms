@@ -1,17 +1,25 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Clock :size="400" :subdivisions="[x, y]" />
+    
+    <div>
+      <input type="number" min="1" max="16" v-model="x" />
+      :
+      <input type="number" min="1" max="16" v-model="y" />
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Clock from './components/Clock.vue'
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    Clock
+  },
+  data: function() {
+    return { x: 2, y: 3 };
   }
 }
 </script>
