@@ -3,14 +3,9 @@
     <Clock :size="400" :subdivisions="[x, y]" :active="[ax, ay]" />
     
     <div>
-      <input type="number" min="1" max="16" v-model="x" />
+      <input type="number" min="1" max="16" v-model="x" :readonly="active" />
       :
-      <input type="number" min="1" max="16" v-model="y" />
-    </div>
-    <div>
-      <input type="range" min="0" :max="x - 1" v-model="ax" />
-      <br />
-      <input type="range" min="0" :max="y - 1" v-model="ay" />
+      <input type="number" min="1" max="16" v-model="y" :readonly="active" />
     </div>
     <div>
       <button @click="start" v-if="!active">Start</button>
@@ -31,7 +26,12 @@ export default {
     return { x: 2, y: 3, ax: 0, ay: 0, active: false, xIntvl: null, yIntvl: null };
   },
   methods: {
+    reset: function() {
+      this.ax = 0;
+      this.ay = 0;
+    },
     start: function() {
+      this.reset();
       const measure = 2000;
       this.xIntvl = setInterval(() => {
         this.ax++;
@@ -46,6 +46,7 @@ export default {
       this.active = true;
     },
     stop: function() {
+      this.reset();
       clearInterval(this.xIntvl);
       clearInterval(this.yIntvl);
       this.active = false;
